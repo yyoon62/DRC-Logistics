@@ -15,12 +15,11 @@ for i in range(len(temp)):
         indexDict[temp[i]] =i 
 
 
-
 distm = np.loadtxt(open("data/kMat.csv","rb"),delimiter=',')
 cm = np.loadtxt(open("data/kConditionMat.csv","rb"),delimiter=",")
 
 iid,jid = range(len(distm)),range(len(distm))
-seasonality = 1
+seasonality = 0
 if seasonality ==1:
         for i in iid:
             for j in jid:
@@ -72,8 +71,12 @@ st([sum( x[i,j] for i in iid if i!=j)== sum( x[j,i] for i in iid if i!=j) for j 
 
 solve("float")
 print("Total Cost= %g"%(vobj()))
-
+tempList = []
 for item in E:
-	if x[item].primal > 0:
-		print x[item]
-		print temp[item[0]],temp[item[1]]
+    if x[item].primal > 0:
+        tempList.append(x[item])
+        print x[item]
+        print temp[item[0]],temp[item[1]]
+
+
+
